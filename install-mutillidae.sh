@@ -22,25 +22,37 @@
 
 
 # Update the OS and install LAMP Server
-sudo apt-get update
-sudo apt-get dist-upgrade -y
-sudo apt-get install tasksel -y
-sudo tasksel install lamp-server
+echo -e "Task #1: Updating and installing LAMP-Server. Might take a few mins...\n"
+sudo apt-get update > /dev/null
+sudo apt-get dist-upgrade -y > /dev/null
+sudo apt-get install tasksel -y > /dev/null
+sudo tasksel install lamp-server > /dev/null
+echo -e "Task #1: Done!\n"
 
-# Add additional packages for Mutillidae to work 
+# Add additional packages for Mutillidae to work
+echo -e "Task #2: Installing additional packages needed for Mutillidae...\n"
 sudo apt-get install php-xml php-fpm libapache2-mod-php php-mysql php-xml php-gd php-imap php-mysql php-gettext php-curl -y
 sudo a2enmod proxy_fcgi setenvif
 sudo a2enconf php7.2-fpm
+echo -e "Task #2: Done!\n"
 
 # The next line is very dangerous, it allows anyone to connect to all databases with no restriction without a username and password. 
-echo 'skip-grant-tables' | sudo tee -a /etc/mysql/mysql.conf.d/mysqld.cnf
+echo -e "Task #3: Adding skip-grant-tables to mysqld.cnf. Remember, this leaves a giant hole in MySQL...\n"
+echo 'skip-grant-tables' | sudo tee -a /etc/mysql/mysql.conf.d/mysqld.cnf > /dev/null
+echo -e "Task#3: Done!\n
 
 # Restart the services to accept the changes
+echo -e "Task #4: Restarting all the services...\n"
 sudo systemctl reload apache2
 sudo systemctl restart apache2
 sudo systemctl restart mysql
+echo -e "Task #4: Done!\n"
 
 # Install mutillidae
+echo -e "Task #5: Cloning Mutillidae from github and setting correct owner permissions\n"
 sudo mkdir /var/www/html/mutillidae
 git clone https://github.com/webpwnized/mutillidae.git /var/www/html/mutillidae
 sudo chown www-data:www-data -R /var/www/html/mutillidae
+echo -e "Task #5: Done!\n"
+
+

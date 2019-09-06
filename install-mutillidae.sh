@@ -31,9 +31,9 @@ echo -e "Task #1: Done!\n"
 
 # Add additional packages for Mutillidae to work
 echo -e "Task #2: Installing additional packages needed for Mutillidae...\n"
-sudo apt-get install php-xml php-fpm libapache2-mod-php php-mysql php-xml php-gd php-imap php-mysql php-gettext php-curl -y
-sudo a2enmod proxy_fcgi setenvif
-sudo a2enconf php7.2-fpm
+sudo apt-get install php-xml php-fpm libapache2-mod-php php-mysql php-xml php-gd php-imap php-mysql php-gettext php-curl -y > /dev/null
+sudo a2enmod proxy_fcgi setenvif > /dev/null
+sudo a2enconf php7.2-fpm > /dev/null
 echo -e "Task #2: Done!\n"
 
 # The next line is very dangerous, it allows anyone to connect to all databases with no restriction without a username and password. 
@@ -43,16 +43,16 @@ echo -e "Task#3: Done!\n
 
 # Restart the services to accept the changes
 echo -e "Task #4: Restarting all the services...\n"
-sudo systemctl reload apache2
-sudo systemctl restart apache2
-sudo systemctl restart mysql
+sudo systemctl reload apache2 > /dev/null
+sudo systemctl restart apache2 > /dev/null
+sudo systemctl restart mysql > /dev/null
 echo -e "Task #4: Done!\n"
 
 # Install mutillidae
 echo -e "Task #5: Cloning Mutillidae from github and setting correct owner permissions\n"
-sudo mkdir /var/www/html/mutillidae
-git clone https://github.com/webpwnized/mutillidae.git /var/www/html/mutillidae
-sudo chown www-data:www-data -R /var/www/html/mutillidae
+sudo mkdir /var/www/html/mutillidae > /dev/null
+git clone https://github.com/webpwnized/mutillidae.git /var/www/html/mutillidae > /dev/null
+sudo chown www-data:www-data -R /var/www/html/mutillidae > /dev/null
 echo -e "Task #5: Done!\n"
 
 

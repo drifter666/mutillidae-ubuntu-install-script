@@ -36,7 +36,7 @@ error_exit()
 ipaddress=`hostname -I`
 
 # Update the OS and install LAMP Server
-echo -e "Task #1: Updating and installing LAMP-Server. Might take a few mins..."
+echo -e "\nTask #1: Updating and installing LAMP-Server. Might take a few mins..."
 sudo apt-get update > /dev/null
 sudo apt-get dist-upgrade -y > /dev/null
 sudo apt-get install tasksel -y > /dev/null

@@ -32,6 +32,7 @@ error_exit()
   echo "$1" 1>&2
   exit 1
 }
+ipaddress = `hostname -I`
 
 # Update the OS and install LAMP Server
 echo -e "Task #1: Updating and installing LAMP-Server. Might take a few mins..."
@@ -49,7 +50,7 @@ sudo a2enconf php7.2-fpm > /dev/null
 echo -e "Task #2: Done!\n"
 
 # The next line is very dangerous, it allows anyone to connect to all databases with no restriction without a username and password. 
-echo -e "Task #3: Adding skip-grant-tables to mysqld.cnf.\n Remember, this leaves a giant security hole in MySQL..."
+echo -e "Task #3: Adding skip-grant-tables to mysqld.cnf...\n ***Remember, this leaves a giant security hole in MySQL***"
 echo 'skip-grant-tables' | sudo tee -a /etc/mysql/mysql.conf.d/mysqld.cnf > /dev/null
 echo -e "Task #3: Done!\n"
 
@@ -62,9 +63,14 @@ echo -e "Task #4: Done!\n"
 
 # Install mutillidae
 echo -e "Task #5: Cloning Mutillidae from github and setting correct owner permissions..."
-sudo mkdir /var/www/html/mutillidae &> /dev/null || error_exit "Directory already exists. Mutillidae already installed? Aborting!"
+sudo mkdir /var/www/html/mutillidae &> /dev/null || error_exit "Directory already exists. Mutillidae already installed? Aborting!\n"
 git clone --quiet https://github.com/webpwnized/mutillidae.git /var/www/html/mutillidae > /dev/null
 sudo chown www-data:www-data -R /var/www/html/mutillidae > /dev/null
 echo -e "Task #5: Done!\n"
 
+echo -e "You are now ready to start hacking the OWASP Top 10 with Mutillidae!"
+echo -e "If you installed this on a Virtual Machine, it is highly recommended\n to change the Virtual Interface to 'Host-Only'\n"
+echo -e "To begin, open a web browser to: ${ipaddress// /}/mutillidae"
+echo -e "Note the above IP address will be different if you change the Virtual Interface to 'Host-Only'"
+echo -e "Enjoy! =)"
 

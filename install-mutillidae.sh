@@ -4,7 +4,7 @@
 # Once Mutillidae is installed, the network configuration should be changed to host-only on the VM Host. 
 # This webserver is extremely vulnerable and shouldn't be available network wide.
 # Script created Sept 4th, 2019
-
+#
 # Copyright (C) 2019 drifter666
 #
 # This program is free software: you can redistribute it and/or modify
@@ -19,6 +19,7 @@
 #
 # You should have received a copy of the GNU General Public License
 # along with this program.  If not, see <https://www.gnu.org/licenses/>.
+#
 echo -e "    __  ___      __  _ _____     __              ____           __        ____         "
 echo -e "   /  |/  /_  __/ /_(_) / (_)___/ /___ ____     /  _/___  _____/ /_____ _/ / /__  _____"
 echo -e "  / /|_/ / / / / __/ / / / / __  / __ \`/ _ \    / // __ \/ ___/ __/ __ \`/ / / _ \/ ___/"
@@ -32,7 +33,7 @@ error_exit()
   echo "$1" 1>&2
   exit 1
 }
-ipaddress = `hostname -I`
+ipaddress=`hostname -I`
 
 # Update the OS and install LAMP Server
 echo -e "Task #1: Updating and installing LAMP-Server. Might take a few mins..."

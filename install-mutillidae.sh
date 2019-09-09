@@ -49,7 +49,7 @@ sudo a2enconf php7.2-fpm > /dev/null
 echo -e "Task #2: Done!\n"
 
 # The next line is very dangerous, it allows anyone to connect to all databases with no restriction without a username and password. 
-echo -e "Task #3: Adding skip-grant-tables to mysqld.cnf. Remember, this leaves a giant hole in MySQL..."
+echo -e "Task #3: Adding skip-grant-tables to mysqld.cnf.\n Remember, this leaves a giant security hole in MySQL..."
 echo 'skip-grant-tables' | sudo tee -a /etc/mysql/mysql.conf.d/mysqld.cnf > /dev/null
 echo -e "Task #3: Done!\n"
 

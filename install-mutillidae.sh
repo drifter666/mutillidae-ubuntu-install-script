@@ -19,10 +19,22 @@
 #
 # You should have received a copy of the GNU General Public License
 # along with this program.  If not, see <https://www.gnu.org/licenses/>.
+echo -e "     __  ___      __  _ _____     __              ____           __        ____         "
+echo -e "    /  |/  /_  __/ /_(_) / (_)___/ /___ ____     /  _/___  _____/ /_____ _/ / /__  _____"
+echo -e "   / /|_/ / / / / __/ / / / / __  / __ `/ _ \    / // __ \/ ___/ __/ __ `/ / / _ \/ ___/"
+echo -e "  / /  / / /_/ / /_/ / / / / /_/ / /_/ /  __/  _/ // / / (__  ) /_/ /_/ / / /  __/ /    "
+echo -e " /_/  /_/\__,_/\__/_/_/_/_/\__,_/\__,_/\___/  /___/_/ /_/____/\__/\__,_/_/_/\___/_/     "
+echo -e " Works only in Ubuntu Linux "
 
+# Error Exit Function
+error_exit()
+{
+  echo "$1" 1>&2
+  exit 1
+}
 
 # Update the OS and install LAMP Server
-echo -e "Task #1: Updating and installing LAMP-Server. Might take a few mins...\n"
+echo -e "Task #1: Updating and installing LAMP-Server. Might take a few mins..."
 sudo apt-get update > /dev/null
 sudo apt-get dist-upgrade -y > /dev/null
 sudo apt-get install tasksel -y > /dev/null
@@ -30,28 +42,28 @@ sudo tasksel install lamp-server > /dev/null
 echo -e "Task #1: Done!\n"
 
 # Add additional packages for Mutillidae to work
-echo -e "Task #2: Installing additional packages needed for Mutillidae...\n"
+echo -e "Task #2: Installing additional packages needed for Mutillidae..."
 sudo apt-get install php-xml php-fpm libapache2-mod-php php-mysql php-xml php-gd php-imap php-mysql php-gettext php-curl -y > /dev/null
 sudo a2enmod proxy_fcgi setenvif > /dev/null
 sudo a2enconf php7.2-fpm > /dev/null
 echo -e "Task #2: Done!\n"
 
 # The next line is very dangerous, it allows anyone to connect to all databases with no restriction without a username and password. 
-echo -e "Task #3: Adding skip-grant-tables to mysqld.cnf. Remember, this leaves a giant hole in MySQL...\n"
+echo -e "Task #3: Adding skip-grant-tables to mysqld.cnf. Remember, this leaves a giant hole in MySQL..."
 echo 'skip-grant-tables' | sudo tee -a /etc/mysql/mysql.conf.d/mysqld.cnf > /dev/null
-echo -e "Task#3: Done!\n
+echo -e "Task #3: Done!\n"
 
 # Restart the services to accept the changes
-echo -e "Task #4: Restarting all the services...\n"
+echo -e "Task #4: Restarting all the services..."
 sudo systemctl reload apache2 > /dev/null
 sudo systemctl restart apache2 > /dev/null
 sudo systemctl restart mysql > /dev/null
 echo -e "Task #4: Done!\n"
 
 # Install mutillidae
-echo -e "Task #5: Cloning Mutillidae from github and setting correct owner permissions\n"
-sudo mkdir /var/www/html/mutillidae > /dev/null
-git clone https://github.com/webpwnized/mutillidae.git /var/www/html/mutillidae > /dev/null
+echo -e "Task #5: Cloning Mutillidae from github and setting correct owner permissions..."
+sudo mkdir /var/www/html/mutillidae &> /dev/null || error_exit "Directory already exists. Mutillidae already installed? Aborting!"
+git clone --quiet https://github.com/webpwnized/mutillidae.git /var/www/html/mutillidae > /dev/null
 sudo chown www-data:www-data -R /var/www/html/mutillidae > /dev/null
 echo -e "Task #5: Done!\n"
 

@@ -65,7 +65,7 @@ echo -e "Task #4: Done!\n"
 # Install mutillidae
 echo -e "Task #5: Cloning Mutillidae from github and setting correct owner permissions..."
 sudo mkdir /var/www/html/mutillidae &> /dev/null || error_exit "Directory already exists. Mutillidae already installed? Aborting!\n"
-git clone --quiet https://github.com/webpwnized/mutillidae.git /var/www/html/mutillidae &> /dev/null || error_exit "Got Git?\n"
+sudo git clone --quiet https://github.com/webpwnized/mutillidae.git /var/www/html/mutillidae &> /dev/null || error_exit "Got Git?\n"
 sudo chown www-data:www-data -R /var/www/html/mutillidae > /dev/null
 echo -e "Task #5: Done!\n"
 

@@ -36,7 +36,7 @@ error_exit()
 ipaddress=`hostname -I`
 
 # Update the OS and install LAMP Server
-echo -e "\nTask #1: Updating and installing LAMP-Server. Might take a few mins..."
+echo -e "Task #1: Updating and installing LAMP-Server. Might take a few mins..."
 sudo apt-get update > /dev/null
 sudo apt-get dist-upgrade -y > /dev/null
 sudo apt-get install tasksel -y > /dev/null
@@ -65,7 +65,7 @@ echo -e "Task #4: Done!\n"
 # Install mutillidae
 echo -e "Task #5: Cloning Mutillidae from github and setting correct owner permissions..."
 sudo mkdir /var/www/html/mutillidae &> /dev/null || error_exit "Directory already exists. Mutillidae already installed? Aborting!\n"
-git clone --quiet https://github.com/webpwnized/mutillidae.git /var/www/html/mutillidae > /dev/null
+git clone --quiet https://github.com/webpwnized/mutillidae.git /var/www/html/mutillidae &> /dev/null || error_exit "Got Git?\n"
 sudo chown www-data:www-data -R /var/www/html/mutillidae > /dev/null
 echo -e "Task #5: Done!\n"
 

@@ -70,7 +70,7 @@ sudo chown www-data:www-data -R /var/www/html/mutillidae > /dev/null
 echo -e "Task #5: Done!\n"
 
 echo -e "You are now ready to start hacking the OWASP Top 10 with Mutillidae!"
-echo -e "If you installed this on a Virtual Machine, it is highly recommended\n to change the Virtual Interface to 'Host-Only'\n"
+echo -e "If you installed this on a Virtual Machine, it is highly recommended\nto change the Virtual Interface to 'Host-Only'\n"
 echo -e "To begin, open a web browser to: ${ipaddress// /}/mutillidae"
 echo -e "Note the above IP address will be different if you change the Virtual Interface to 'Host-Only'"
 echo -e "Enjoy! =)"
